@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def array_describe(arr):
+def array_describe(arr, print_data=True, return_data=False):
 
     arr_info = {
         'shape': arr.shape,
@@ -9,21 +9,38 @@ def array_describe(arr):
         'range': np.array([np.min((arr), axis=0), np.max((arr), axis=0)]).T,
         'std': np.std(arr, axis=0)
     }
+
     labels = ['shape', 'mean', 'range', 'std']
-    for label in labels:
-        print('{}:\n{}\n'.format(label, arr_info[label]))
 
-    return arr_info
+    if print_data:
+        for label in labels:
+            print('{}:\n{}\n'.format(label, arr_info[label]))
+
+    if return_data:
+        return arr_info
 
 
-def standard_normalize(arr):
+def standard_normalize(arr, detail=False, specified=False, std=None, mean=None):
+    """
+    :param arr:
+    :param std:
+    :param mean:
+    :param specified:
+    :param detail:
+    :return: arr or arr, mean, std
+    """
 
-    std = np.std(arr, axis=0)
-    mean = np.mean(arr, axis=0)
+    if not specified:
+        std = np.std(arr, axis=0)
+        mean = np.mean(arr, axis=0)
 
     arr_norm = (arr - mean) / std
 
-    return arr_norm
+    if detail:
+        return arr_norm, mean, std
+
+    else:
+        return arr_norm
 
 
 def array_divide_random(arr, ratio=0.9):
