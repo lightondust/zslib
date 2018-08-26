@@ -1,3 +1,17 @@
+import sys, os
+
+
+# package
+def find_package_location(package_name):
+    for path in sys.path:
+        if path:
+            try:
+                if package_name in os.listdir(path):
+                    return path
+            except Exception:
+                pass
+
+# file I/O
 def get_line_from_file(line_no, f):
     line = get_lines_from_file([line_no], f)[line_no]
     return line
