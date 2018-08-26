@@ -22,6 +22,7 @@ def scatter_plot3Ds(arrs, dims=(0,1,2), transvers=False):
             arr = arr.T
         ax.scatter3D(arr[dims[0]], arr[dims[1]], arr[dims[2]])
 
+
 def scatter_plot_by_group(arr, intvl_length=50):
     plt.figure()
     label_count = 0
@@ -33,7 +34,7 @@ def scatter_plot_by_group(arr, intvl_length=50):
 
 def scatter_plot(arr):
     plt.figure()
-    plt.scatter(arr[:,0], arr[:,1])
+    plt.scatter(arr[:,0], arr[:,1], label='a')
     plt.legend()
 
 
