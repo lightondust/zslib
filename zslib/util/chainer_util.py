@@ -35,9 +35,9 @@ def get_trainer(model, train_iter, test_iter, loss_func=None, epoch=EPOCH,
 
     # Set up an updater
     updater = training.updaters.StandardUpdater(
-        train_iter, optimizer, loss_func=loss_func)
+        train_iter, optimizer, device=device, loss_func=loss_func)
     trainer = training.Trainer(updater, (epoch, 'epoch'))
-    trainer.extend(extensions.Evaluator(test_iter, model, device=device
+    trainer.extend(extensions.Evaluator(test_iter, model, device=device,
                                         eval_func=loss_func))
     trainer.extend(extensions.dump_graph('main/loss'))
     trainer.extend(extensions.LogReport())
