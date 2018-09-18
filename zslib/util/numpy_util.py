@@ -51,3 +51,32 @@ def array_divide_random(arr, ratio=0.9):
     arr_shuffle = arr[id_all]
 
     return arr_shuffle[:cut_pos], arr_shuffle[cut_pos:]
+
+
+def cross_validation_set(arr, ratio=0.9, random=True):
+
+    dim = arr.shape[0]
+    id_all = np.random.choice(dim, dim, replace=False)
+
+    cut_length = dim - int(dim * ratio)
+    arr_shuffle = arr[id_all]
+
+    if random:
+        arr = arr_shuffle
+
+    cross_set = []
+    for step in range(int(arr.shape[0] / cut_length)):
+        start = step * cut_length
+        end = start + cut_length
+        arr_test = arr[start:end]
+        arr_train = np.vstack((arr[:start], arr[end:]))
+
+        data_ = [arr_train, arr_test]
+
+        if len(cross_set) >= int(1/ratio):
+            break
+
+        cross_set.append(data_)
+
+    return cross_set
+

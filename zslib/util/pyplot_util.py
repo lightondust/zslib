@@ -8,16 +8,10 @@ def scatter_plot3D(arr, dims=(0,1,2)):
     ax.scatter3D(arr[:,dims[0]], arr[:,dims[1]], arr[:,dims[2]])
 
 
-# def scatter_plot3Ds(arrs, dims=(0,1,2)):
-#     fig = plt.figure()
-#     ax = Axes3D(fig)
-#     for arr in arrs:
-#         ax.scatter3D(arr[:,dims[0]], arr[:,dims[1]], arr[:,dims[2]])
-
 def scatter_plot3Ds(arrs, dims=(0,1,2), transvers=False):
     fig = plt.figure()
     ax = Axes3D(fig)
-    for arr in arrs:
+    for i, arr in enumerate(arrs):
         if transvers:
             arr = arr.T
         ax.scatter3D(arr[dims[0]], arr[dims[1]], arr[dims[2]])
@@ -38,18 +32,9 @@ def scatter_plot(arr):
     plt.legend()
 
 
-def scatter_plots(arrs):
-    plt.figure()
-    label_count = 0
-    for arr in arrs:
-        plt.scatter(arr[:,0], arr[:,1], label=str(label_count), alpha=0.5)
-        label_count += 1
-    plt.legend()
-
-
-def scatter_plots(arrs, labels=[]):
+def scatter_plots(arrs, ax=[0,1], labels=[], figsize=(8,7), title='', save=False, filename='',transvers=False):
     from matplotlib.markers import TICKLEFT, TICKRIGHT, TICKUP, TICKDOWN, CARETLEFT, CARETRIGHT, CARETUP, CARETDOWN
-    plt.figure(figsize=(8,7),dpi=200)
+    plt.figure(figsize=figsize, dpi=200)
     markers = [
         ',', 'o', 'v', '^', '<', '>', '1', '2', '3', '4', '8', 's', 'p', '*', 'h', 'H', '+', 'x', 'D', 'd', '|', '_',
         TICKLEFT, TICKRIGHT, TICKUP, TICKDOWN, CARETLEFT, CARETRIGHT, CARETUP, CARETDOWN
@@ -59,5 +44,16 @@ def scatter_plots(arrs, labels=[]):
     if not len(labels):
         labels = range(1, len(arrs)+1)
     for count, arr in enumerate(arrs):
-        plt.scatter(arr[0], arr[1], s=10, alpha =0.4, label=labels[count], marker=markers[count])
+        if transvers:
+            arr = arr.T
+        plt.scatter(arr[ax[0]], arr[ax[1]], s=10, alpha =0.4, label=labels[count], marker=markers[count])
+    plt.title(title)
     plt.legend()
+
+    if save:
+        if not filename:
+            filename = 'temp.png'
+        plt.savefig(filename)
+        plt.close()
+
+
