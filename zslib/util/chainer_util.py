@@ -25,7 +25,7 @@ def load_model(model_path, model):
 
 
 def get_trainer(model, train_iter, test_iter, loss_func=None, epoch=EPOCH,
-                report='', progress_bar=False, device=-1):
+                report='', progress_bar=False, device=-1, log_trigger=1):
     # Setup an optimizer
     optimizer = chainer.optimizers.Adam()
     optimizer.setup(model)
@@ -40,7 +40,7 @@ def get_trainer(model, train_iter, test_iter, loss_func=None, epoch=EPOCH,
     trainer.extend(extensions.Evaluator(test_iter, model, device=device,
                                         eval_func=loss_func))
     trainer.extend(extensions.dump_graph('main/loss'))
-    trainer.extend(extensions.LogReport())
+    trainer.extend(extensions.LogReport(trigger=(log_trigger, 'epoch')))
 
     if report == '':
         report = ['epoch', 'main/loss', 'validation/main/loss', 'elapsed_time']
