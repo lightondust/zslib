@@ -100,3 +100,24 @@ def plot_decision_regions(X, y, classifier, test_idx=None, resolution=0.02):
                     marker='o',
                     s=100,
                     label='test set')
+
+
+def plot_decision_boundary(X, classifier, center=[], resolution=0.02):
+    x1_min, x1_max = X[:, 0].min(), X[:, 0].max()
+    x2_min, x2_max = X[:, 1].min(), X[:, 1].max()
+    xx1, xx2 = np.meshgrid(np.arange(x1_min, x1_max, resolution),
+                           np.arange(x2_min, x2_max, resolution))
+
+    Z = classifier(np.array([xx1.ravel(), xx2.ravel()]).T)
+    Z = Z.reshape(xx1.shape)
+
+    plt.scatter(X[:, 0],
+                X[:, 1],
+                s=3, alpha=0.5)
+
+    plt.contourf(xx1, xx2, Z, alpha=0.3)
+    plt.xlim(xx1.min(), xx1.max())
+    plt.ylim(xx2.min(), xx2.max())
+
+    if len(center):
+        plt.scatter(center[:, 0], center[:, 1], c='r', s=500, marker='v')
