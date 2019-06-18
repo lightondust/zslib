@@ -1,6 +1,12 @@
 import sys, os
 
 
+def make_dir(dir_path):
+    if not os.path.exists(dir_path):
+        os.mkdir(dir_path)
+        os.chmod(dir_path, mode=0o775)
+
+
 # package
 def find_package_location(package_name):
     for path in sys.path:
