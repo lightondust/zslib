@@ -14,6 +14,11 @@ def save_to_json(dict_obj, path):
         json.dump(dict_obj, f)
 
 
+def load_json(path):
+    with open(path, 'r') as f:
+        return json.load(f)
+
+
 def save(path, obj):
     with open(path, 'wb') as f:
         pickle.dump(obj, f)
