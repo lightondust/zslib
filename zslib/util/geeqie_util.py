@@ -1,7 +1,12 @@
 import os
 
 
-def map_to_geeqie_collection(label_path_map, save_to_dir='./label_data'):
+def map_to_geeqie_collection(label_path_map, save_to_dir):
+    """
+    :param label_path_map: key is label, value is list of file path
+    :param save_to_dir:
+    :return:
+    """
     header_lines = ['#Geeqie collection',
                     '#created with Geeqie version 1.4',
                     '#geometry: 0 28 1440 2532']
@@ -36,6 +41,10 @@ def file_list_from_gqv(gqv_path):
 
 
 def label_path_map_from_gqv_list(geeqie_list):
+    """
+    :param geeqie_list: list of geeqie filepath
+    :return: dict with, key is label, value is file path list
+    """
     label_path_map = {}
     for gqv in geeqie_list:
         label = gqv.split('/')[-1].split('.')[0]
