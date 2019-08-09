@@ -17,7 +17,7 @@ def get_html_obj(url, headers={}, sleep=TIME_SLEEP, encoding='auto'):
     return html_obj
 
 
-def element_to_string(element):
+def element_to_html_string(element):
     string = html.tostring(element, encoding='utf-8').decode()
     return string
 
