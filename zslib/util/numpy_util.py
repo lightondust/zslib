@@ -1,4 +1,13 @@
 import numpy as np
+from numpy import ndarray
+
+
+def value_to_index(value, arr):
+    return values_to_indices([value], arr)[0]
+
+
+def values_to_indices(values, arr: ndarray):
+    return np.array([(arr < v).sum() for v in values])
 
 
 def array_describe(arr, print_data=True, return_data=False):
@@ -6,7 +15,7 @@ def array_describe(arr, print_data=True, return_data=False):
     arr_info = {
         'shape': arr.shape,
         'mean': np.mean(arr, axis=0),
-        'range': np.array([np.min((arr), axis=0), np.max((arr), axis=0)]).T,
+        'range': np.array([np.min(arr, axis=0), np.max(arr, axis=0)]).T,
         'std': np.std(arr, axis=0)
     }
 
