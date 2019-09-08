@@ -1,6 +1,10 @@
 from datetime import datetime
 
 
+def print_now(other_info=None):
+    print('{}:{}'.format(datetime.now(), other_info))
+
+
 def get_today():
     return datetime.now().date()
 
