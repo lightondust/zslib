@@ -55,10 +55,11 @@ class BaseDatabase(object):
             res.append(i)
         return res
 
+
 class Database(BaseDatabase):
 
-    def __init__(self, key_path=KEY_PATH):
-        super().__init__(key_path=key_path
+    def __init__(self, key_path):
+        super().__init__(key_path=key_path)
 
 
 def get_vision_client(key_path):
