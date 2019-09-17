@@ -6,7 +6,7 @@ def set_env(key_path):
     os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = key_path
 
 
-class Database(object):
+class BaseDatabase(object):
 
     def __init__(self, key_path):
         self.key_path = key_path
@@ -54,6 +54,11 @@ class Database(object):
                 break
             res.append(i)
         return res
+
+class Database(BaseDatabase):
+
+    def __init__(self, key_path=KEY_PATH):
+        super().__init__(key_path=key_path
 
 
 def get_vision_client(key_path):
