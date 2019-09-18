@@ -39,6 +39,10 @@ class BaseDatabase(object):
     def delete_document(self, collection, document):
         self.db.collection(collection).document(document).delete()
 
+    def update_data(self, collection, document, key, val):
+        query = self.db.collection(collection).document(document)
+        query.update({key: val})
+
     @staticmethod
     def iter_n_items(iterator, n):
         """
