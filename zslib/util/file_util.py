@@ -1,4 +1,4 @@
-import sys, os
+import os
 import json
 import pickle
 
@@ -29,31 +29,6 @@ def load(path):
         obj = pickle.load(f)
     return obj
 
-
-def iter_n_items(iterator, n):
-    """
-    :param iterator: iterator, for list use iterator = iter(lst); res = iter_n_items(iterator)
-    :param n:
-    :return:
-    """
-    res = []
-    count = 0
-    for i in iterator:
-        count += 1
-        if count > n:
-            break
-        res.append(i)
-    return res
-
-# package
-def find_package_location(package_name):
-    for path in sys.path:
-        if path:
-            try:
-                if package_name in os.listdir(path):
-                    return path
-            except Exception:
-                pass
 
 # file I/O
 def get_line_from_file(line_no, f):
