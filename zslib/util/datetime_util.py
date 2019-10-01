@@ -1,12 +1,20 @@
 from datetime import datetime
+from pytz import timezone
 
 
-def print_now(other_info=None):
-    print('{}:{}'.format(datetime.now(), other_info))
+def get_time_now(time_zone='Asia/Tokyo'):
+    if time_zone:
+        return datetime.now(timezone(time_zone))
+    else:
+        return datetime.now()
 
 
-def get_today():
-    return datetime.now().date()
+def print_now(other_info=None, time_zone=''):
+    print('{}:{}'.format(get_time_now(time_zone=time_zone), other_info))
+
+
+def get_today(time_zone=None):
+    return get_time_now(time_zone=time_zone).date()
 
 
 def get_time_for_file_name(precision='minute'):
