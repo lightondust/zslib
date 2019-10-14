@@ -17,6 +17,19 @@ def iter_n_items(iterator, n):
     return res
 
 
+def compare_list(a, b):
+    print('a not in b')
+    for i in a:
+        if i not in b:
+            print(i)
+
+    print()
+    print('b not in a')
+    for i in b:
+        if i not in a:
+            print(i)
+
+
 # package
 def find_package_location(package_name):
     for path in sys.path:
