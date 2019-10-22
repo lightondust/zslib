@@ -40,3 +40,7 @@ def find_package_location(package_name):
             except Exception:
                 pass
 
+
+def print_to_file(file_path, message):
+    with open(file_path, 'a') as f:
+        print(message, file=f)
