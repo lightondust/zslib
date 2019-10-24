@@ -1,4 +1,5 @@
 import sys, os
+import traceback
 
 
 def iter_n_items(iterator, n):
@@ -28,6 +29,11 @@ def compare_list(a, b):
     for i in b:
         if i not in a:
             print(i)
+
+
+def log_error_to(file_path):
+    with open(file_path, 'a') as f:
+        traceback.print_exc(file=f)
 
 
 # package
