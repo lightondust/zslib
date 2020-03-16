@@ -31,9 +31,20 @@ def compare_list(a, b):
             print(i)
 
 
-def log_error_to(file_path):
+def log_error_to_file(file_path):
     with open(file_path, 'a') as f:
         traceback.print_exc(file=f)
+
+
+def log_error(file_path, console=False):
+    from zslib.util.datetime_util import get_time_now
+    if console:
+        print(str(get_time_now()))
+        traceback.print_exc()
+    else:
+        print_to_file(file_path, str(get_time_now()))
+        with open(file_path, 'a') as f:
+            traceback.print_exc(file=f)
 
 
 # package
