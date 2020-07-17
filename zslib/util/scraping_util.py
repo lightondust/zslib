@@ -22,13 +22,19 @@ def get_driver(headless=False):
         return dr
 
 
-def get_html_obj(url, headers={}, sleep=TIME_SLEEP, encoding='auto'):
+def get_html_obj(url, headers={}, sleep=TIME_SLEEP, encoding='auto', change_encode=''):
     response = requests.get(url, headers=headers)
     if encoding == 'auto':
         response.encoding = response.apparent_encoding
     elif encoding:
         response.encoding = encoding
-    html_obj = html.fromstring(response.text)
+
+    if change_encode:
+        html_str = response.text.encode(change_encode)
+    else:
+        html_str = response.text
+
+    html_obj = html.fromstring(html_str)
     time.sleep(sleep)
     return html_obj
 
