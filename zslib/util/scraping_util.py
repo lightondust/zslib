@@ -23,6 +23,14 @@ def get_driver(headless=False):
 
 
 def get_html_obj(url, headers={}, sleep=TIME_SLEEP, encoding='auto', change_encode=''):
+    """
+    :param url:
+    :param headers:
+    :param sleep:
+    :param encoding:
+    :param change_encode: in case get the html string but however cannot parse, pass change_encode='utf-8'
+    :return:
+    """
     response = requests.get(url, headers=headers)
     if encoding == 'auto':
         response.encoding = response.apparent_encoding
